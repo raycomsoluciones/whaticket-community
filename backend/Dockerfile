@@ -14,12 +14,22 @@ RUN apt-get update \
     && apt-get update \
     && apt-get install -y google-chrome-stable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf libxss1 \
       --no-install-recommends \
+    && apt-get install -y \
+       xvfb \
+       libnss3 \
+       libxss1 \
+       libasound2 \
+       libatk1.0-0 \
+       libatk-bridge2.0-0 \
+       libgtk-3-0 \
+       libdrm2 \
+       --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 ADD https://github.com/Yelp/dumb-init/releases/download/v1.2.1/dumb-init_1.2.1_amd64 /usr/local/bin/dumb-init
 RUN chmod +x /usr/local/bin/dumb-init
 
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
 WORKDIR /usr/src/app
 COPY package*.json ./
@@ -30,9 +40,9 @@ RUN npm run build
 
 ENV NODE_ENV=production
 ENV PORT=3000
-ENV CHROME_BIN=google-chrome-stable
+ENV CHROME_BIN=/usr/bin/google-chrome-stable
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
-ENV PUPPETEER_ARGS=--no-sandbox,--disable-setuid-sandbox
+ENV PUPPETEER_ARGS="--no-sandbox --disable-setuid-sandbox"
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
 EXPOSE 3000
