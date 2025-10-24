@@ -48,20 +48,27 @@ export const initWbot = async (whatsapp: Whatsapp): Promise<Session> => {
   '--disable-setuid-sandbox',
   '--disable-dev-shm-usage',
   '--disable-accelerated-2d-canvas',
+  '--disable-gpu',
   '--no-first-run',
   '--no-zygote',
-  '--disable-gpu'
+  '--window-size=1920,1080',
+  '--disable-background-timer-throttling',
+  '--disable-renderer-backgrounding',
+  '--disable-backgrounding-occluded-windows'
 ];
 
 const wbot: Session = new Client({
   session: sessionCfg,
   authStrategy: new LocalAuth({ clientId: 'bd_' + whatsapp.id }),
   puppeteer: {
-    headless: true,
+    headless: 'new', 
     executablePath: process.env.CHROME_BIN || '/usr/bin/google-chrome-stable',
-    args: puppeteerArgs
+    args: puppeteerArgs,
+    ignoreHTTPSErrors: true, 
+    defaultViewport: null
   }
 });
+
 
       wbot.initialize();
 
