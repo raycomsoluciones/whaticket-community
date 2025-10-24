@@ -63,7 +63,8 @@ const wbot: Session = new Client({
   puppeteer: {
     headless: true,
     ignoreHTTPSErrors: true, 
-    defaultViewport: null
+    defaultViewport: null,
+    args: ["--no-sandbox", "--disable-setuid-sandbox"]
   }
 });
 
