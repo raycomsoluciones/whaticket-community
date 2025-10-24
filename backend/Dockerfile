@@ -31,6 +31,9 @@ RUN npm run build
 ENV NODE_ENV=production
 ENV PORT=3000
 ENV CHROME_BIN=google-chrome-stable
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
+ENV PUPPETEER_ARGS=--no-sandbox,--disable-setuid-sandbox
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
 EXPOSE 3000
 
