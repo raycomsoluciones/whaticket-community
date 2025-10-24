@@ -57,6 +57,7 @@ const wbot: Session = new Client({
   session: sessionCfg,
   authStrategy: new LocalAuth({ clientId: 'bd_' + whatsapp.id }),
   puppeteer: {
+    headless: true,
     executablePath: process.env.CHROME_BIN || '/usr/bin/google-chrome-stable',
     args: puppeteerArgs
   }
