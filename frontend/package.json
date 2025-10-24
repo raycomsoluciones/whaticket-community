@@ -29,7 +29,7 @@
     "socket.io-client": "^3.0.5",
     "use-sound": "^2.0.1",
     "yup": "^0.32.8",
-    "lamejs": "1.2.0"
+    "lamejs": "^1.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
